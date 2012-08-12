@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>event:taphold</title>
+    <meta charset="utf-8" />
+    
+    <style>
+    .events div {
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+        float: left;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .events #one {
+        background: #f00;
+    }
+
+    .events #two {
+        background: #0f0;
+    }
+
+    .events #three {
+        background: #000;
+        color: #fff;
+    }
+
+    .events #four {
+        background: #fff;
+        color: #000;
+        border: 1px solid #000;
+    }
+            
+    .events #five {
+        background: #dcda07;
+        color: #000;
+    }
+
+    .events #six {
+        background: #f10fff;
+        color: #000;
+    }
+
+    .events #debug {
+        clear: both;
+        background: #000;
+        color: #fff;
+        width: 100%;
+        display: block;
+        margin-top: 2em;
+        min-height: 100px;
+        padding-bottom: 1em;
+        font-family: monospace;
+    }
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="taphold.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    $(function() 
+    {
+        $("#one").bind("taphold", function() { $("#debug").append("\ntap and hold on ONE"); });
+    
+        $("#two").on("taphold", function() { $("#debug").append("\ntap and hold on TWO"); });        
+        
+        $("#three").on("taphold",
+                       {clickHandler: function() { $("#debug").append("\nclick on THREE"); }},
+                       function() { $("#debug").append("\ntap and hold on THREE"); });
+                       
+        $("#four").on("taphold", function() { $("#debug").append("\ntap and hold on FOUR"); })
+                  .on("click",   function() { $("#debug").append("\nclick on FOUR"); });
+                       
+        $("#five").draggable();
+        $("#five").on("taphold", function() { $("#debug").append("\ntap and hold on FIVE"); })
+                  .on("click",   function() { $("#debug").append("\nclick on FIVE"); });
+                       
+        $("#six").droppable();
+        $("#six").on("taphold", function() { $("#debug").append("\ntap and hold on SIX"); })
+                 .on("click",   function() { $("#debug").append("\nclick on SIX"); });   
+    });
+    </script>
+</head>
+<body class="events">
+    <div id="one">ONE<br/><br/>tap-hold</div>
+    <div id="two">TWO<br/><br/>tap-hold (alt)</div>
+    <div id="three">THREE<br/><br/>tap-hold<br/>click</div>
+    <div id="four">FOUR<br/><br/>tap-hold<br/>click (alt)</div>
+    <div id="five">FIVE<br/><br/>draggable<br/>tap-hold<br/>click (alt)</div>
+    <div id="six">SIX<br/><br/>droppable<br/>tap-hold<br/>click (alt)</div>
+    <pre id="debug"></pre>
+</body>
+</html>

@@ -8,14 +8,14 @@ Usage:
     {
         // Actions
     });
-    
+
     // or
-        
+
     $("#element").on("taphold", function()
     {
         // Actions
     });
-    
+
 You can combine the event with a click event but just also specifying a click event.
 
     $("#element").on("taphold", function()

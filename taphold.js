@@ -12,7 +12,8 @@
 
         // If object also has click handler, store it and unbind. Taphold will trigger the
         // click itself, rather than normal propagation.
-        if (typeof $elem.data("events").click != "undefined")
+        if (typeof $elem.data("events") != "undefined"
+            && typeof $elem.data("events").click != "undefined")
         {
             // Find the one without a namespace defined.
             for (var c in $elem.data("events").click)

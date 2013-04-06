@@ -88,19 +88,23 @@
         $(this).data("taphold_cancelled", true);
     }
 
+    // Determine if touch events are supported.
+    var touchSupported = ("ontouchstart" in window) // Most browsers
+                         || ("onmsgesturechange" in window); // Mircosoft
+
     var taphold = $.event.special.taphold =
     {
         setup: function(data)
         {
-            $(this).bind("touchstart mousedown",  data, startHandler)
-                   .bind("touchend mouseup",    stopHandler)
-                   .bind("touchmove mouseleave", leaveHandler);
+            $(this).bind((touchSupported ? "touchstart" : "mousedown"),  data, startHandler)
+                   .bind((touchSupported ? "touchend"   : "mouseup"),    stopHandler)
+                   .bind((touchSupported ? "touchmove"  : "mouseleave"), leaveHandler);
         },
         teardown: function(namespaces)
         {
-            $(this).unbind("touchstart mousedown",  startHandler)
-                   .unbind("touchend mouseup",    stopHandler)
-                   .unbind("touchmove mouseleave", leaveHandler);
+            $(this).unbind((touchSupported ? "touchstart" : "mousedown"),  startHandler)
+                   .unbind((touchSupported ? "touchend"   : "mouseup"),    stopHandler)
+                   .unbind((touchSupported ? "touchmove"  : "mouseleave"), leaveHandler);
         }
     };
 })(jQuery);

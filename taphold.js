@@ -97,7 +97,7 @@
 
     // Determine if touch events are supported.
     var touchSupported = ("ontouchstart" in window) // Most browsers
-                         || ("onmsgesturechange" in window); // Mircosoft
+                         || ("onmsgesturechange" in window); // Microsoft
 
     var taphold = $.event.special.taphold =
     {
